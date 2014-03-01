@@ -1,3 +1,49 @@
+This is a fork of minirc[1][2] adapted to work w/ sinit[3][4] 
+instead of busybox.
+
+The same restrictions (see "A word of warning" below) apply here.
+You may want to try out busybox init first.
+
+Currently busybox is used to provide killall5 and halt, please change to
+your convenience.. (e.g. sysvinit package on Arch, I may create a package
+providing those two commands)
+
+Currently I changed command names to avoid a conflict w/ minirc so they can
+coexist, but you need to use the adapted command names.
+(The names might change in future, evtl. back to rc as it's so simple. This
+would then conflict with minirc.)
+
+/sbin/rc --> /sbin/sminirc
+/sbin/shutdown --> /sbin/sminirc-shutdown (use this to poweroff/reboot)
+
+/etc/minirc.conf The same config is used for both variants!
+Same goes for .local files.
+
+On Arch you can use the patched package sinit-minirc-git for sinit.
+Kernel parameter: init=/usr/bin/sinit
+
+I slightly modified the rc behaviour to my liking.
+- rc start/stop shouldn't affect _all_ daemons
+- don't remount / rw (is done by the Arch initramfs)
+- add /run/lock (as in Arch)
+
+shutdown() was basically put together from original minirc, sinit fs
+example[5] and brebs busybox init (also see [2]).
+
+respawn is from [5] as well.
+
+[1]: minirc: https://github.com/hut/minirc
+[2]: minirc on Arch forum: https://bbs.archlinux.org/viewtopic.php?id=162606
+[3]: sinit: http://git.2f30.org/sinit/
+[4]: sinit on Arch forum: https://bbs.archlinux.org/viewtopic.php?id=176854
+[5]: http://git.2f30.org/fs
+
+My own setup as a "working" configuration example: https://github.com/rebootl/minirc-playground
+
+
+Below is the unmodified README text of minirc.
+----------------------------------------------
+
 minirc - minimalistic rc script
 ===============================
 
