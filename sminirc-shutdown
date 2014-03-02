@@ -23,14 +23,14 @@ case "$1" in
 #            /sbin/halt;;
     -P|--poweroff)
         if [ $TIME != 0 ]; then
-            echo "System is going down for poweroff in $TIME seconds." | wall
+            #echo "System is going down for poweroff in $TIME seconds." | wall
             sleep $TIME
         fi
         kill -s USR 1
         ;;
     -r|--reboot)
         if [ $TIME != 0 ]; then
-            echo "System is going down for reboot in $TIME seconds." | wall
+            #echo "System is going down for reboot in $TIME seconds." | wall
             sleep $TIME
         fi
         kill -s INT 1
